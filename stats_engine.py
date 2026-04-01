@@ -20,6 +20,30 @@ def codons(read):
         if triplet in codon:
             codon[triplet] +=1
     return codon
+def kmer(read,klen):
+    k_mer_counts={}
+    for i in range(0,len(read)-klen+1):
+        mer=str(read[i:i+klen])
+        if mer in k_mer_counts:
+            k_mer_counts[mer]+=1
+        else:
+            k_mer_counts[mer]=1
+    return k_mer_counts
+def motif(read,length,mot):
+    n=len(mot)
+    count=0
+    for i in range(0,length-n):
+        k=str(read[i:i+n])
+        if k ==n :
+            count+=1
+    return count
+            
+
+        
+
+        
+
+
  
 
         

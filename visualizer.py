@@ -15,3 +15,14 @@ def heatmap(codon):
     plt.title("64 Codon Frequency Heatmap", fontsize=16)
     plt.show()
     plt.savefig("heat map")
+def kmertable(kmers):
+    plt.bar(kmers.keys(),kmers.values())
+    plt.title("Kmer count table")
+    plt.xlabel("kmers")
+    plt.xticks(rotation=90, ha='right', fontsize=4)
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.ylabel("kmers freqency")
+    plt.show()
+
+    

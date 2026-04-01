@@ -1,7 +1,7 @@
 import argparse
 from Bio import SeqIO
-import stats_engine as sec
-from visualizer import heatmap
+import stats_engine as sec 
+from visualizer import heatmap, kmertable
 def load_sequence(file_path):
     try:
         for record in SeqIO.parse(file_path,"fasta"):
@@ -20,7 +20,13 @@ def main():
     if dna:
         codon_freq=sec.codons(dna)
         result=sec.Gc_content(dna,length)
+        klen=int(input("enter the K-mer length: "))
+        motif_seq=input("enter the motif sequence:")
+        motif_freq=sec.motif(dna,length,motif_seq)
+        kmer_freq=sec.kmer(dna,klen)
         print(result)
+        print("the desired",motif_seq,"appears",motif_freq,"times")
         heatmap(codon_freq)
+        kmertable(kmer_freq)
 if __name__ == "__main__":
     main()
