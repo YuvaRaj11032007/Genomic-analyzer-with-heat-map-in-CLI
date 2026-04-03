@@ -2,6 +2,7 @@ import argparse
 from Bio import SeqIO
 import stats_engine as sec 
 from visualizer import heatmap, kmertable
+import promoter_predictor as pp
 def load_sequence(file_path):
     try:
         for record in SeqIO.parse(file_path,"fasta"):
@@ -26,6 +27,16 @@ def main():
         kmer_freq=sec.kmer(dna,klen)
         print(result)
         print("the desired",motif_seq,"appears",motif_freq,"times")
+        print("\n--- Promoter Prediction Analysis ---")
+        probability, top_motifs = pp.predict_promoter(str(dna))
+        print(f"Probability of being a Promoter: {probability:.2%}")
+        if probability > 0.5:
+            print("Result: POSITIVE (Likely a Promoter)")
+        else:
+            print("Result: NEGATIVE (Likely non-promoter)")
+        print("\nTop Contributing K-mers:")
+        for kmer, weight in top_motifs:
+            print(f"  - {kmer}: {weight}")
         heatmap(codon_freq)
         kmertable(kmer_freq)
 if __name__ == "__main__":

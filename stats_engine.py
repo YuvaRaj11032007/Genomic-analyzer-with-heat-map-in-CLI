@@ -34,7 +34,7 @@ def motif(read,length,mot):
     count=0
     for i in range(0,length-n):
         k=str(read[i:i+n])
-        if k ==n :
+        if k ==mot :
             count+=1
     return count
             
